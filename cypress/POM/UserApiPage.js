@@ -41,12 +41,12 @@ class UserApiPage {
         })
     }
   
-    // Example of getting all users
+    // Method to get all users
     getAllUsers() {
       cy.request('GET', `${this.baseUrl}/allUser`);
     }
   }
   
-  // Export the class so you can use it in your test scripts
+  // Export the class in order to use it in the test scripts
   export default UserApiPage;
   

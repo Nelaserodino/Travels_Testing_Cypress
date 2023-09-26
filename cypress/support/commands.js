@@ -1,25 +1,20 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+/// <reference types="Cypress" /> 
+
+Cypress.Commands.add('connect', () => {
+    cy.visit('http://localhost:3000/login')
+    cy.title().should("contain", "React App")
+    cy.location('hostname').should('eq', 'localhost')
+    cy.location('protocol').should('contain', 'http')
+})
+
+Cypress.Commands.add('login', () => { 
+    cy.get('[placeholder="Email"]').clear('n');
+    cy.get('[placeholder="Email"]').type('nela@test.com');
+    cy.get('[placeholder="Password"]').clear('1');
+    cy.get('[placeholder="Password"]').type('1234');
+    cy.get('.divFormAuth > :nth-child(3)').click(); 
+})
+
+Cypress.Commands.add('logout', () => { 
+    cy.get(':nth-child(4) > :nth-child(3)').click();
+})

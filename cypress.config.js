@@ -18,6 +18,7 @@ function queryTestDB(query,config) {
 
 module.exports = defineConfig({
   e2e: {
+    experimentalStudio: true,
     setupNodeEvents(on, config) {
       on('task', {
         queryDB: (query) => {

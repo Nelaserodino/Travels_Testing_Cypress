@@ -9,10 +9,10 @@ describe("Get User API", () => {
   let createdUserId;
 
   it("should create a user", () => {
-    const randomEmail = generateRandomEmail(); // Generate a random email for each test run
+    const randomEmail = generateRandomEmail(); 
     const userData = {
       name: "John Doe",
-      email: randomEmail, // Use the generated random email
+      email: randomEmail, 
       password: "password123",
     };
 
@@ -42,5 +42,12 @@ describe("Get User API", () => {
     userApi.deleteUser(createdUserId).then(response => {
       expect(response.status).to.eq(200);
     });
+  });
+
+  it("Check that the user does not exist in the DataBase", () => {
+    cy.task("queryDB", `SELECT * FROM user WHERE user_id = ${createdUserId}`)
+    .then(result => {
+      expect(result.length).to.eq(0)
+    })
   });
 });
