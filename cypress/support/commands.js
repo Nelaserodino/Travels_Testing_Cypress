@@ -7,11 +7,18 @@ Cypress.Commands.add('connect', () => {
     cy.location('protocol').should('contain', 'http')
 })
 
+// Login with Xpaths
 Cypress.Commands.add('login', () => { 
-    cy.get('[placeholder="Email"]').clear('n');
-    cy.get('[placeholder="Email"]').type('nela@test.com');
-    cy.get('[placeholder="Password"]').clear('1');
-    cy.get('[placeholder="Password"]').type('1234');
+    cy.xpath('//input[@name="email"]')
+        .should('have.attr', 'placeholder', 'Email') 
+        .clear('n') 
+        .type('nela@test.com'); 
+
+    cy.xpath('//input[@name="password"]')
+        .should('have.attr', 'placeholder', 'Password') 
+        .clear('1') 
+        .type('1234'); 
+
     cy.get('.divFormAuth > :nth-child(3)').click(); 
 })
 
